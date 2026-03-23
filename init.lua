@@ -661,6 +661,9 @@ require('lazy').setup({
         vim.lsp.config(name, server)
         vim.lsp.enable(name)
       end
+
+      -- clangd is installed system-wide via apt, not via Mason
+      vim.lsp.enable 'clangd'
     end,
   },
 
