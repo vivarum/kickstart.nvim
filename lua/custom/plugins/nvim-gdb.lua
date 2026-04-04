@@ -13,6 +13,17 @@ return {
     }
   end,
   config = function()
+    vim.keymap.set('n', '<leader>dd', function()
+      local pid = vim.trim(vim.fn.system 'pgrep mariadbd')
+      if pid == '' then
+        vim.notify('mariadbd process not found', vim.log.levels.ERROR)
+        return
+      end
+      vim.cmd('GdbStartLLDB lldb -p ' .. pid .. ' -S /home/ubuntu/shared/mariadb-server/.lldb_breakpoints')
+    end, { desc = 'Debug: Start LLDB' })
+
+    vim.keymap.set('n', '<leader>dx', function() vim.cmd 'GdbDebugStop' end, { desc = 'Debug: Stop' })
+
     --------------------
     -- This is a nvim-gdb integration that syncs the current source location across two tabs when a breakpoint is hit.
     -- Here's what it does step by step:

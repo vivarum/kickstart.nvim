@@ -99,21 +99,6 @@ vim.keymap.set('n', '<A-a>', '<cmd>BlameToggle<CR>', { desc = 'Git Blame Toggle'
 ----------------
 vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>')
 
---------------
--- nvim-gdb --
---------------
--- start / stop debugger
-vim.keymap.set('n', '<leader>dd', function()
-  local pid = vim.trim(vim.fn.system 'pgrep mariadbd')
-  if pid == '' then
-    vim.notify('mariadbd process not found', vim.log.levels.ERROR)
-    return
-  end
-  vim.cmd('GdbStartLLDB lldb -p ' .. pid .. ' -S /home/ubuntu/shared/mariadb-server/.lldb_breakpoints')
-end, { desc = 'Debug: Start LLDB' })
-
-vim.keymap.set('n', '<leader>dx', function() vim.cmd 'GdbDebugStop' end, { desc = 'Debug: Stop' })
-
 --------------------------------
 -- travel across tags keymaps --
 --------------------------------
