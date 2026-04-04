@@ -58,9 +58,12 @@ return { -- Fuzzy Finder (files, lsp, etc)
       --  All the info you're looking for is in `:help telescope.setup()`
       --
       defaults = {
-        -- mappings = {
-        --   i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        -- },
+        mappings = {
+          i = {
+            ['<C-s>'] = require('telescope.actions').select_vertical,
+            ['<c-enter>'] = 'to_fuzzy_refine',
+          },
+        },
         layout_strategy = 'horizontal',
         layout_config = {
           horizontal = {

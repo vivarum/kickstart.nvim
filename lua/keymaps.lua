@@ -114,19 +114,6 @@ end, { desc = 'Debug: Start LLDB' })
 
 vim.keymap.set('n', '<leader>dx', function() vim.cmd 'GdbDebugStop' end, { desc = 'Debug: Stop' })
 
----------------
--- telescope --
----------------
-require('telescope').setup {
-  defaults = {
-    mappings = {
-      i = {
-        ['<C-s>'] = require('telescope.actions').select_vertical,
-      },
-    },
-  },
-}
-
 --------------------------------
 -- travel across tags keymaps --
 --------------------------------
