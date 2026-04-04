@@ -13,7 +13,7 @@ return {
         update_root = true, -- Change the root to the project root
       },
       filters = {
-        dotfiles = false, -- Show hidden files if needed
+        dotfiles = false, -- false = show dotfiles, true = hide them
         custom = { '^.git$' }, -- Hide the .git folder to save space/memory
       },
       view = {
