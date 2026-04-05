@@ -74,7 +74,13 @@ return { -- Autocompletion
     },
 
     sources = {
-      default = { 'lsp', 'path', 'snippets' },
+      default = { 'lsp', 'path', 'snippets', 'dadbod' },
+      providers = {
+        dadbod = {
+          name = 'Dadbod',
+          module = 'vim_dadbod_completion.blink',
+        },
+      },
     },
 
     snippets = { preset = 'luasnip' },

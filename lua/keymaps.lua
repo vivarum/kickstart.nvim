@@ -104,3 +104,36 @@ vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>')
 --------------------------------
 vim.keymap.set('n', '<A-D-Left>', '<C-o>', { desc = 'Jump back in jump list' })
 vim.keymap.set('n', '<A-D-Right>', '<C-i>', { desc = 'Jump forward in jump list' })
+
+---------------
+-- dadbod UI --
+---------------
+vim.keymap.set('n', '<leader>dq', function()
+  require('telescope.builtin').find_files {
+    prompt_title = 'Saved DB Queries',
+    cwd = vim.fn.expand '~/.local/share/db_ui',
+    file_ignore_patterns = { 'connections.json' },
+    attach_mappings = function(_, map)
+      map('i', '<CR>', function(prompt_bufnr)
+        local selection = require('telescope.actions.state').get_selected_entry()
+        require('telescope.actions').close(prompt_bufnr)
+        vim.cmd('edit ' .. selection.path)
+        -- Let DBUI attach to this buffer
+        vim.cmd 'DBUIFindBuffer'
+      end)
+      return true
+    end,
+  }
+end, { desc = 'DB: Find saved queries' })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'sql', 'mysql', 'plsql' },
+  callback = function()
+    vim.keymap.set('n', 't', function()
+      local start_line = vim.fn.search(';', 'bnW')
+      local end_line = vim.fn.search(';', 'nW')
+      if end_line == 0 then return end
+      vim.cmd(start_line + 1 .. ',' .. end_line .. 'DB')
+    end, { buffer = true, desc = 'DB: Execute query under cursor' })
+  end,
+})
