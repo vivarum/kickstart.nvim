@@ -68,7 +68,8 @@ vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Toggle NvimTre
 vim.keymap.set('n', '<leader>ef', ':NvimTreeFocus<CR>', { desc = 'Focus NvimTree' })
 
 -- Map '\' to toggle the tree instantly
-vim.keymap.set('n', '\\', ':NvimTreeToggle<CR>', { silent = true, desc = 'Toggle NvimTree' })
+-- vim.keymap.set('n', '\\', ':NvimTreeToggle<CR>', { silent = true, desc = 'Toggle NvimTree' })
+vim.keymap.set('n', '\\', '<cmd>lua Snacks.explorer()<cr>', { silent = true, desc = 'Toggle Explorer' })
 
 ----------
 -- tabs --
