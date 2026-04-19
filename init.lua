@@ -113,10 +113,9 @@ vim.o.mouse = 'a'
 vim.o.showmode = false
 
 -- Sync clipboard between OS and Neovim.
---  Schedule the setting after `UiEnter` because it can increase startup-time.
---  Remove this option if you want your OS clipboard to remain independent.
+--  Clipboard provider and 'unnamedplus' are configured at the bottom of this
+--  file (OSC 52) so yanks reach the host clipboard through Docker/tmux.
 --  See `:help 'clipboard'`
-vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -352,3 +351,19 @@ vim.api.nvim_create_autocmd('OptionSet', {
   pattern = 'background',
   callback = function() vim.cmd.colorscheme 'nightfox' end,
 })
+
+-- setting up clipboard — use built-in OSC 52 so yank reaches host clipboard
+-- (must be set before 'clipboard = unnamedplus')
+local osc52 = require 'vim.ui.clipboard.osc52'
+vim.g.clipboard = {
+  name = 'OSC 52',
+  copy = {
+    ['+'] = osc52.copy '+',
+    ['*'] = osc52.copy '*',
+  },
+  paste = {
+    ['+'] = osc52.paste '+',
+    ['*'] = osc52.paste '*',
+  },
+}
+vim.o.clipboard = 'unnamedplus'
