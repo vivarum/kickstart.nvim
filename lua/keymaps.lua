@@ -166,5 +166,21 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+
+-- Keybinding for the Snacks symbol picker
+vim.keymap.set('n', '<leader>sp', function()
+  Snacks.picker.lsp_symbols {
+    layout = { preset = 'vscode' }, -- Or "vertical" to see more info
+    win = {
+      input = {
+        keys = {
+          ['<c-d>'] = { 'preview_scroll_down', mode = { 'i', 'n' } },
+          ['<c-u>'] = { 'preview_scroll_up', mode = { 'i', 'n' } },
+        },
+      },
+    },
+  }
+end, { desc = 'LSP Symbols (Snacks)' })
+
 -- Snacks toggle terminal on and off
 vim.keymap.set({ 'n', 't' }, '<C-A-p>', function() Snacks.terminal.toggle() end)
