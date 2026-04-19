@@ -136,11 +136,32 @@ end, { desc = 'DB: Find saved queries' })
 vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'sql', 'mysql', 'plsql' },
   callback = function()
+    vim.keymap.set('n', 'T', function()
+      local start_line = vim.fn.search('^$', 'bnW')
+      local end_line = vim.fn.search('^$', 'nW')
+      vim.cmd((start_line == 0 and 1 or start_line + 1) .. ',' .. (end_line == 0 and vim.fn.line '$' or end_line - 1) .. 'DB')
+    end, { buffer = true, desc = 'DB: Execute block until empty line' })
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'sql', 'mysql', 'plsql' },
+  callback = function()
     vim.keymap.set('n', 't', function()
-      local start_line = vim.fn.search(';', 'bnW')
-      local end_line = vim.fn.search(';', 'nW')
-      if end_line == 0 then return end
-      vim.cmd(start_line + 1 .. ',' .. end_line .. 'DB')
-    end, { buffer = true, desc = 'DB: Execute query under cursor' })
+      -- Search backward for the previous semicolon
+      local prev_semi = vim.fn.search(';', 'bnW')
+      -- Search forward for the next semicolon
+      local next_semi = vim.fn.search(';', 'nW')
+
+      -- Logic for range:
+      -- Start: line after the previous semicolon (or line 1)
+      local start_line = (prev_semi == 0) and 1 or (prev_semi + 1)
+
+      -- End: the line containing the next semicolon (or end of file)
+      local end_line = (next_semi == 0) and vim.fn.line '$' or next_semi
+
+      -- Execute the range
+      vim.cmd(start_line .. ',' .. end_line .. 'DB')
+    end, { buffer = true, desc = 'DB: Execute statement until semicolon' })
   end,
 })
