@@ -102,9 +102,9 @@ vim.keymap.set('n', '<A-j>', '<C-w>-')
 vim.keymap.set('n', '<A-a>', '<cmd>BlameToggle<CR>', { desc = 'Git Blame Toggle' })
 
 ----------------
--- aerial.nvim --
+-- outline.nvim --
 ----------------
-vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>')
+vim.keymap.set('n', '<leader>a', '<cmd>Outline<CR>')
 
 --------------------------------
 -- travel across tags keymaps --
