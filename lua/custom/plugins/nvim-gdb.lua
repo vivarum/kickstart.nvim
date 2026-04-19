@@ -4,12 +4,12 @@ return {
   init = function()
     -- Override default keymaps to match what you're used to
     vim.g.nvimgdb_config_override = {
-      key_next = '<F2>',
-      key_step = '<F3>',
-      key_finish = '<F4>',
-      key_continue = '<F5>',
+      key_next = '<F8>',
+      key_step = '<F7>',
+      key_finish = '<F6>',
+      key_continue = '<F10>',
       key_breakpoint = '<leader>b',
-      key_until = '<F6>',
+      key_until = '<F12>',
     }
   end,
   config = function()
