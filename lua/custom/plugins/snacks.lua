@@ -5,18 +5,41 @@ return {
   ---@type snacks.Config
   opts = {
     -- Enable the modules you want
+    animate = { enabled = true },
     bigfile = { enabled = true },
     dashboard = { enabled = true },
     explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
-    picker = { enabled = true },
+    picker = {
+      enabled = true,
+      sources = {
+        files = {
+          layout = {
+            layout = { width = 0.95, height = 0.95 },
+          },
+        },
+        grep = {
+          layout = {
+            layout = { width = 0.95, height = 0.95 },
+          },
+        },
+        smart = {
+          layout = {
+            layout = { width = 0.95, height = 0.95 },
+          },
+        },
+      },
+    },
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
     scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
+    terminal = {
+      shell = 'fish',
+    },
   },
   keys = {
     -- Top pickers (Replacing Telescope defaults)
