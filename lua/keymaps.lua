@@ -165,3 +165,6 @@ vim.api.nvim_create_autocmd('FileType', {
     end, { buffer = true, desc = 'DB: Execute statement until semicolon' })
   end,
 })
+
+-- Snacks toggle terminal on and off
+vim.keymap.set({ 'n', 't' }, '<C-A-p>', function() Snacks.terminal.toggle() end)
