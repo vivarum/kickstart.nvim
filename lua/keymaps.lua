@@ -166,6 +166,42 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+----------------------------
+-- toggle window maximize --
+----------------------------
+local function toggle_maximize_vertical()
+  if vim.t.max_restore_vertical then
+    vim.cmd(vim.t.max_restore_vertical)
+    vim.t.max_restore_vertical = nil
+  else
+    vim.t.max_restore_vertical = vim.fn.winrestcmd()
+    vim.cmd 'wincmd _'
+  end
+end
+
+local function toggle_maximize_horizontal()
+  if vim.t.max_restore_horizontal then
+    vim.cmd(vim.t.max_restore_horizontal)
+    vim.t.max_restore_horizontal = nil
+  else
+    vim.t.max_restore_horizontal = vim.fn.winrestcmd()
+    vim.cmd 'wincmd |'
+  end
+end
+
+-- local function toggle_maximize_both()
+--   if vim.t.max_restore_both then
+--     vim.cmd(vim.t.max_restore_both)
+--     vim.t.max_restore_both = nil
+--   else
+--     vim.t.max_restore_both = vim.fn.winrestcmd()
+--     vim.cmd 'wincmd _'
+--     vim.cmd 'wincmd |'
+--   end
+-- end
+
+vim.keymap.set({ 'n', 't' }, '<C-_>', toggle_maximize_vertical, { desc = 'Toggle Maximize Vertical' })
+vim.keymap.set({ 'n', 't' }, '<C-\\>', toggle_maximize_horizontal, { desc = 'Toggle Maximize Horizontal' })
 
 -- Keybinding for the Snacks symbol picker
 vim.keymap.set('n', '<leader>sp', function()
