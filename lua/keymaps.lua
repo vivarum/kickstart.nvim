@@ -201,7 +201,7 @@ end
 -- end
 
 vim.keymap.set({ 'n', 't' }, '<C-_>', toggle_maximize_vertical, { desc = 'Toggle Maximize Vertical' })
-vim.keymap.set({ 'n', 't' }, '<C-\\>', toggle_maximize_horizontal, { desc = 'Toggle Maximize Horizontal' })
+vim.keymap.set('n', '<C-\\>', toggle_maximize_horizontal, { desc = 'Toggle Maximize Horizontal' })
 
 -- Keybinding for the Snacks symbol picker
 vim.keymap.set('n', '<leader>sp', function()
